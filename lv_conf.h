@@ -119,7 +119,7 @@
 
     /* Enable native helium assembly to be compiled */
     #define LV_USE_NATIVE_HELIUM_ASM    0
-    
+
     /* 0: use a simple renderer capable of drawing only simple rectangles with gradient, images, texts, and straight lines only
      * 1: use a complex renderer capable of drawing rounded corners, shadow, skew lines, and arcs too */
     #define LV_DRAW_SW_COMPLEX          1
@@ -991,6 +991,22 @@
 /*Vector graphic demo*/
 #define LV_USE_DEMO_VECTOR_GRAPHIC  0
 /*--END OF LV_CONF_H--*/
+
+
+// config.h
+#ifndef CONFIG_H
+#define CONFIG_H
+
+// 开发模式定义（在编译时通过-DDEV_MODE=1设置）
+#ifndef DEV_MODE
+#define DEV_MODE 0  // 默认生产模式
+#endif
+
+// 圆形屏幕直径
+#define SCREEN_DIAMETER 466
+#define SAFE_AREA_DIAMETER 400
+
+#endif
 
 #endif /*LV_CONF_H*/
 

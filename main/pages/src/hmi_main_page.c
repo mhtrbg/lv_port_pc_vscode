@@ -12,7 +12,9 @@ HMI_REGISTER_PAGE(hmi_main_page, HMI_MAIN_PAGE)
 /**************************************************/
 
 /* 冲泡按钮事件回调 */
-static void main_page_btn_brew_event_cb(lv_event_t *e) {}
+static void main_page_btn_brew_event_cb(lv_event_t *e) {
+  lv_label_set_text(hmi_main_page.label_status, "Brewing...");
+}
 static void main_page_btn_to_test_event_cb(lv_event_t *e) {
   page_manager_go_to(INSTANCE_PAGE(hmi_test_page), NULL);
 }
@@ -44,7 +46,14 @@ static void page_init() {
 
   hmi_main_page_t *page = &hmi_main_page;
   // 创建屏幕
-  page->base.screen = lv_obj_create(NULL);
+  page->base.screen = create_round_screen();
+  // 添加圆形遮罩
+  lv_obj_t *mask = lv_obj_create(page->base.screen);
+  lv_obj_set_size(mask, 466, 466);
+  lv_obj_set_style_radius(mask, LV_RADIUS_CIRCLE, 0);
+  lv_obj_set_style_bg_color(mask, lv_color_black(), 0);
+  lv_obj_set_style_bg_opa(mask, LV_OPA_COVER, 0);
+  lv_obj_set_style_border_width(mask, 0, 0);
   // 创建冲泡按钮
   page->btn_brew = lv_btn_create(page->base.screen);
   lv_obj_set_pos(page->btn_brew, 100, 100);
@@ -71,6 +80,7 @@ static void page_init() {
   page->label_status = lv_label_create(page->base.screen);
   lv_obj_set_pos(page->label_status, 100, 200);
   lv_label_set_text(page->label_status, "Ready");
+  lv_obj_set_style_text_color(page->label_status, lv_color_white(), 0);
 
   // 创建温度控制
   page->temp_slider = lv_slider_create(page->base.screen);
@@ -84,6 +94,7 @@ static void page_init() {
   page->temp_label = lv_label_create(page->base.screen);
   lv_obj_set_pos(page->temp_label, 320, 250);
   lv_label_set_text_fmt(page->temp_label, "%d°C", 85);
+  lv_obj_set_style_text_color(page->temp_label, lv_color_white(), 0);
 }
 
 /* 页面进入 通用*/
@@ -101,15 +112,15 @@ static void page_destroy(void) {
 
 /* 主页面update实现 */
 static void page_update(void *data) {
-  hmi_main_page_t *page = &hmi_main_page;
-  hmi_main_page_data_t *update = (hmi_main_page_data_t *)data;
+  // hmi_main_page_t *page = &hmi_main_page;
+  // hmi_main_page_data_t *update = (hmi_main_page_data_t *)data;
 
-  if (update->status) {
-    lv_label_set_text(page->label_status, update->status);
-  }
+  // if (update->status) {
+  //   lv_label_set_text(page->label_status, update->status);
+  // }
 
-  if (update->target_temp > 0) {
-    lv_slider_set_value(page->temp_slider, update->target_temp, LV_ANIM_ON);
-    lv_label_set_text_fmt(page->temp_label, "%d°C", update->target_temp);
-  }
+  // if (update->target_temp > 0) {
+  //   lv_slider_set_value(page->temp_slider, update->target_temp, LV_ANIM_ON);
+  //   lv_label_set_text_fmt(page->temp_label, "%d°C", update->target_temp);
+  // }
 }

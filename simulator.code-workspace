@@ -29,7 +29,12 @@
 			"lv_style.h": "c",
 			"lv_color.h": "c",
 			"lv_obj_pos.h": "c",
-			"global_def.h": "c"
+			"global_def.h": "c",
+			"page_manager.h": "c",
+			"cusom_widgets.h": "c",
+			"hmi_main_page.h": "c",
+			"system_error": "c",
+			"xlocale": "c"
 		},
 	},
 	// tasks.json section

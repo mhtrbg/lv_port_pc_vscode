@@ -25,12 +25,6 @@ static void timer_cb(lv_timer_t *timer) {
   if (counter > 100) {
     counter = 0;
   }
-
-  // 模拟阻塞（测试 UI 卡顿）
-  if (counter % 5 == 0) {  // 每 5 次触发一次阻塞
-                           // lv_label_set_text(hmi_test_page.label_status,
-                           // "Blocking..."); blocking_task(); // 故意阻塞 500ms
-  }
 }
 
 /**************************************************/
@@ -41,7 +35,7 @@ static void timer_cb(lv_timer_t *timer) {
 static void page_init() {
   hmi_test_page_t *page = &hmi_test_page;
   // 创建屏幕
-  page->base.screen = lv_obj_create(NULL);
+  page->base.screen = create_round_screen();
 
   // // 创建按钮
   page->btn_back = lv_btn_create(page->base.screen);

@@ -2,7 +2,8 @@
 #define __PAGE_MANAGER_H__
 
 #include <lvgl.h>
-
+#include "custom_widgets.h"
+#include "ui_style.h"
 #define DECLARE_PAGE(name) extern name##_t name
 
 #define INSTANCE_PAGE(page_name) ((page_base_t *)&(page_name))
