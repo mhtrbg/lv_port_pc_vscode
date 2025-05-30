@@ -94,8 +94,18 @@ static void page_init() {
   page->temp_label = lv_label_create(page->base.screen);
   lv_obj_set_pos(page->temp_label, 320, 250);
   lv_label_set_text_fmt(page->temp_label, "%d°C", 85);
+
+  // set_color(page->temp_label);
   lv_obj_set_style_text_color(page->temp_label, lv_color_white(), 0);
 }
+// static int color_type = 0;
+// void set_color(lv_obj_t *obj) {
+//   if (color_type == 0) {
+//     lv_obj_set_style_text_color(obj, lv_color_white(), 0);
+//   } else if (color_type == 1) {
+//     lv_obj_set_style_text_color(obj, lv_color_black(), 0);
+//   }
+// }
 
 /* 页面进入 通用*/
 static void page_enter(void *args) {}

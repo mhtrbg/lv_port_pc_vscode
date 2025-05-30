@@ -34,7 +34,13 @@
 			"cusom_widgets.h": "c",
 			"hmi_main_page.h": "c",
 			"system_error": "c",
-			"xlocale": "c"
+			"xlocale": "c",
+			"algorithm": "c",
+			"functional": "c",
+			"optional": "c",
+			"type_traits": "c",
+			"xtr1common": "c",
+			"xutility": "c"
 		},
 	},
 	// tasks.json section
