@@ -2,8 +2,11 @@ cmake_minimum_required(VERSION 3.10)
 project(lvgl C CXX)
 
 # Main include files of the project
-include_directories(${PROJECT_SOURCE_DIR}/main/inc)
-
+include_directories(
+    ${PROJECT_SOURCE_DIR}/main/INC       # global_def.h
+    ${PROJECT_SOURCE_DIR}/main/hmi_manager/inc  # page_manager.h
+    ${PROJECT_SOURCE_DIR}/main/pages/inc        # hmi_main_page.h
+)
 # Define options for LVGL with default values (OFF)
 option(LV_USE_DRAW_SDL "Use SDL draw unit" OFF)
 option(LV_USE_LIBPNG "Use libpng to decode PNG" OFF)
@@ -43,13 +46,23 @@ if(NOT WIN32)
     target_include_directories(lvgl PUBLIC ${SDL2_INCLUDE_DIRS})
 endif()
 
-file(GLOB_RECURSE PROJ_SRC ${PROJECT_SOURCE_DIR}/main/src/*.c ${PROJECT_SOURCE_DIR}/main/src/*.cpp)
-
+# 递归查找所有源文件（注意大小写问题）
+file(GLOB_RECURSE PROJ_SRC
+    ${PROJECT_SOURCE_DIR}/main/SRC/*.c          # main.c
+    ${PROJECT_SOURCE_DIR}/main/hmi_manager/src/*.c  # page_manager.c
+    ${PROJECT_SOURCE_DIR}/main/pages/src/*.c    # hmi_main_page.c
+    ${PROJECT_SOURCE_DIR}/main/fonts/*.c        # HarmonyOS_Sans_SC_Regular_24.c
+)
 add_executable(main
     ${PROJ_SRC}
 )
 
-target_include_directories(main PUBLIC ${PROJECT_SOURCE_DIR}/main/include ${PROJECT_SOURCE_DIR}/main/src)
+# 需要确保头文件路径被包含
+target_include_directories(main PUBLIC
+    ${PROJECT_SOURCE_DIR}/main/INC
+    ${PROJECT_SOURCE_DIR}/main/hmi_manager/inc
+    ${PROJECT_SOURCE_DIR}/main/pages/inc
+)
 
 # Define LVGL configuration as a simple include
 target_compile_definitions(main PRIVATE LV_CONF_INCLUDE_SIMPLE)
@@ -83,7 +96,7 @@ endif()
 # Conditionally include and link FFmpeg libraries if LV_USE_FFMPEG is enabled
 if(LV_USE_FFMPEG)
     if(WIN32)
-        set(FFMPEG_DIR E:/Projects/ffmpeg-7.1-full_build-shared)
+        set(FFMPEG_DIR D:/WORK/ffmpeg-shared)
         target_include_directories(lvgl PUBLIC ${FFMPEG_DIR}/include)
         target_link_libraries(main ${FFMPEG_DIR}/lib/avformat.lib ${FFMPEG_DIR}/lib/avcodec.lib ${FFMPEG_DIR}/lib/avutil.lib ${FFMPEG_DIR}/lib/swscale.lib)
     elseif(APPLE)
