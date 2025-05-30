@@ -22,3 +22,14 @@ lv_obj_t* create_round_screen(void) {
 
   return screen;
 }
+
+lv_obj_t* create_my_button(lv_obj_t* base, lv_event_cb_t event_cb,
+                           void* user_data) {
+  lv_obj_t* btn_brew = lv_btn_create(base);
+  lv_obj_set_pos(btn_brew, 100, 100);
+  lv_obj_set_size(btn_brew, 120, 50);
+  lv_obj_add_event_cb(btn_brew, event_cb, LV_EVENT_CLICKED, user_data);
+  lv_obj_t* label = lv_label_create(btn_brew);
+  lv_label_set_text(label, "start brew");
+  lv_obj_center(label);
+};

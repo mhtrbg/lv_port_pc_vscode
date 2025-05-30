@@ -2,7 +2,8 @@
 #include <lvgl.h>
 #include "hmi_test_page.h"
 #include "stdio.h"
-
+#include "ui_style.h"
+#include "custom_widgets.h"
 DECLARE_PAGE(hmi_test_page);
 
 HMI_REGISTER_PAGE(hmi_main_page, HMI_MAIN_PAGE)
@@ -45,6 +46,7 @@ static void page_init() {
   hmi_main_page.page_data.target_temp = 85;
 
   hmi_main_page_t *page = &hmi_main_page;
+
   // 创建屏幕
   page->base.screen = create_round_screen();
   // 添加圆形遮罩
@@ -55,16 +57,8 @@ static void page_init() {
   lv_obj_set_style_bg_opa(mask, LV_OPA_COVER, 0);
   lv_obj_set_style_border_width(mask, 0, 0);
   // 创建冲泡按钮
-  page->btn_brew = lv_btn_create(page->base.screen);
-  lv_obj_set_pos(page->btn_brew, 100, 100);
-  lv_obj_set_size(page->btn_brew, 120, 50);
-  lv_obj_add_event_cb(page->btn_brew, main_page_btn_brew_event_cb,
-                      LV_EVENT_CLICKED, page);
 
-  lv_obj_t *label = lv_label_create(page->btn_brew);
-  lv_label_set_text(label, "start brew");
-  lv_obj_center(label);
-
+  // create_my_button(page->base.screen,main_page_btn_to_test_event_cb,page);
   // 创建导航按钮
   page->btn_to_test = lv_btn_create(page->base.screen);
   lv_obj_set_pos(page->btn_to_test, 250, 100);

@@ -40,7 +40,11 @@
 			"optional": "c",
 			"type_traits": "c",
 			"xtr1common": "c",
-			"xutility": "c"
+			"xutility": "c",
+			"stdio.h": "c",
+			"hmi_coffee_page.h": "c",
+			"ui_style.h": "c",
+			"lv_types.h": "c"
 		},
 	},
 	// tasks.json section
