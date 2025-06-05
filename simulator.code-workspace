@@ -44,7 +44,9 @@
 			"stdio.h": "c",
 			"hmi_coffee_page.h": "c",
 			"ui_style.h": "c",
-			"lv_types.h": "c"
+			"lv_types.h": "c",
+			"xiosbase": "c",
+			"hmi_arc_list_test_page.h": "c"
 		},
 	},
 	// tasks.json section
